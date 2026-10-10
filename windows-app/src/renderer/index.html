@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartDex</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="brand">
+        <h1>SmartDex</h1>
+        <p class="tagline">your phone, as a desktop</p>
+      </header>
+
+      <section class="status-row">
+        <span id="status-dot" class="dot idle"></span>
+        <span id="status-text">disconnected</span>
+      </section>
+
+      <section id="reboot-banner" class="reboot hidden">
+        <strong>Reboot required.</strong>
+        Freeform mode was just enabled — reboot your phone, then press Connect again.
+        This is a one-time step.
+      </section>
+
+      <section class="checklist">
+        <h2>First-run checklist</h2>
+        <ul>
+          <li><span class="check" data-key="adbAvailable">?</span> adb available</li>
+          <li><span class="check" data-key="deviceDetected">?</span> USB debugging on &amp; device detected</li>
+          <li><span class="check" data-key="deviceAuthorized">?</span> RSA prompt accepted on the phone</li>
+          <li><span class="check" data-key="freeformEnabled">?</span> freeform multi-window mode enabled</li>
+        </ul>
+        <button id="refresh" type="button">Refresh checklist</button>
+      </section>
+
+      <section class="controls">
+        <button id="connect" type="button" class="primary">Connect</button>
+        <button id="disconnect" type="button" disabled>Disconnect</button>
+      </section>
+
+      <section id="error" class="error hidden"></section>
+
+      <section class="log-panel">
+        <h2>Log</h2>
+        <pre id="log" aria-live="polite"></pre>
+      </section>
+    </main>
+    <script src="renderer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+{"compilerOptions":{"module":"none","outDir":"dist/renderer","resolveJsonModule":false,"rootDir":"src/renderer"},"extends":"./tsconfig.json","include":["src/renderer/**/*.ts"]}
