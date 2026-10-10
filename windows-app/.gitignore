@@ -2,3 +2,5 @@ node_modules/
 dist/
 out/
 *.log
+resources/bin/
+!resources/bin/.gitkeep
