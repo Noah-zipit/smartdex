@@ -1,0 +1,74 @@
+# Build the SmartDex Windows installer.
+#
+# - On push to main: builds the unsigned NSIS .exe and uploads it as the
+#   `smartdex-installer` artifact.
+# - On tags like v1.0.0: same build, then attaches the installer to a
+#   GitHub Release.
+#
+# No code signing: the installer is unsigned, so Windows SmartScreen shows
+# a warning on first run ("Windows protected your PC" -> More info -> Run
+# anyway). This is expected and documented in README.md.
+
+name: Build Windows installer
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+jobs:
+  build:
+    name: Build installer (Windows)
+    runs-on: windows-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: npm
+          cache-dependency-path: windows-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: windows-app
+        run: npm ci
+
+      - name: Fetch bundled binaries (scrcpy + adb)
+        # Zero-dependency Node script: downloads scrcpy v5.0.1 and
+        # platform-tools r37.0.1, verifies checksums, stages them under
+        # windows-app/resources/bin/. Uses PowerShell Expand-Archive on the
+        # Windows runner.
+        run: node scripts/fetch-binaries.js
+
+      - name: Build + package installer
+        working-directory: windows-app
+        run: npm run dist
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: smartdex-installer
+          path: windows-app/dist/*.exe
+          if-no-files-found: error
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download installer artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: smartdex-installer
+          path: installer
+
+      - name: Create release with installer attached
+        uses: softprops/action-gh-release@v2
+        with:
+          files: installer/*.exe
+          generate_release_notes: true

@@ -52,6 +52,34 @@ on-device testing.
 - Android 10+ phone with USB debugging enabled
 - USB cable (or ADB over Wi-Fi)
 
+## Development
+
+Prereqs:
+
+- **Node 20+** (LTS) — for the Windows app and `scripts/fetch-binaries.js`.
+- **JDK + Android SDK** — only needed if you work on `android-helper/`
+  (the Kotlin helper APK). Not needed for the Windows app.
+
+Agent boundaries: `windows-app/src` + `windows-app/package.json` belong to
+the Windows-app agent; `android-helper/` belongs to the Android agent.
+Packaging, CI, and docs are handled separately — coordinate on the shared
+contracts (`windows-app/resources/` layout, the APK filename
+`smartdex-helper.apk`).
+
+## Building the installer
+
+```powershell
+cd windows-app
+npm ci
+node ../scripts/fetch-binaries.js   # downloads scrcpy + adb, verifies checksums
+npm run dist                        # -> windows-app/dist/SmartDex-*.exe
+```
+
+The installer is **unsigned** — Windows SmartScreen will warn on first run
+("Windows protected your PC" → More info → Run anyway). That is expected;
+see [docs/TESTING.md](docs/TESTING.md) for what is verified and what still
+needs on-device testing.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
