@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smartdex.helper">
+
+    <!-- Required on Android 11+ to enumerate every installed launchable app. -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <application
+        android:allowBackup="false"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.SmartDex"
+        android:supportsRtl="true">
+
+        <!-- Launched by the Windows app onto the scrcpy virtual display, e.g.
+             adb shell am start with display id and component
+             com.smartdex.helper/.DeskActivity -->
+        <activity
+            android:name=".DeskActivity"
+            android:exported="true"
+            android:resizeableActivity="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

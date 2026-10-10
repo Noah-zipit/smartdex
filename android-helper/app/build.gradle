@@ -1,0 +1,39 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
+
+android {
+    namespace = "com.smartdex.helper"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.smartdex.helper"
+        minSdk = 28
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
+        debug {
+            // Debug APK is what gets sideloaded by the Windows app.
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    // RecyclerView only — no Compose, no third-party deps.
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+}

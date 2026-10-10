@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wallpaper_top">#FF2B4A73</color>
+    <color name="wallpaper_bottom">#FF101A33</color>
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="search_bg">#33FFFFFF</color>
+</resources>
