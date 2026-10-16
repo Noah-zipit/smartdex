@@ -1,1 +1,27 @@
-{"description":"SmartDex — run your Android apps on a virtual desktop display on Windows","devDependencies":{"@types/node":"^22.10.0","electron":"^44.7.0","electron-builder":"^26.15.3","typescript":"^5.9.2"},"license":"MIT","main":"dist/main/main.js","name":"smartdex","scripts":{"build":"tsc && tsc -p tsconfig.renderer.json && cp src/renderer/index.html src/renderer/styles.css dist/renderer/","dev":"npm run build && electron .","dist":"npm run build && electron-builder --config electron-builder.yml","watch":"tsc --watch"},"version":"0.1.0"}
+{
+  "description": "SmartDex \u2014 run your Android apps on a virtual desktop display on Windows",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.9.2"
+  },
+  "license": "MIT",
+  "main": "dist/main/main.js",
+  "name": "smartdex",
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.renderer.json && cp src/renderer/index.html src/renderer/styles.css dist/renderer/",
+    "dev": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --config electron-builder.yml",
+    "watch": "tsc --watch"
+  },
+  "version": "0.1.0",
+  "author": "Ashar Qaisar",
+  "keywords": [
+    "android",
+    "desktop",
+    "dex",
+    "electron",
+    "screen-mirroring"
+  ]
+}
