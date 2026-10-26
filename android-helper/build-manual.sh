@@ -14,7 +14,7 @@
 #   KOTLINC_HOME  -> Kotlin compiler 2.0.20 dist      (default ~/workspace/kotlinc/kotlinc)
 #   APKLIBS       -> dir with downloaded androidx artifacts
 #                    (default ~/workspace/apklibs; run tools/fetch-deps.py first)
-set -e
+set -euo pipefail
 export JAVA_HOME="${JAVA_HOME:-$HOME/workspace/jdk/jdk17}"
 export PATH="$JAVA_HOME/bin:${KOTLINC_HOME:-$HOME/workspace/kotlinc/kotlinc}/bin:$PATH"
 SDK="${ANDROID_HOME:-$HOME/workspace/sdk}"
